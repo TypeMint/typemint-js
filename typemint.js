@@ -2,10 +2,35 @@ if (typeof ROOTURL == "undefined") {
   ROOTURL = ""; // raw.githubusercontent.com/...
 }
 
+editReady = false;
+
 Typemint = {
+  editor : {
+    init : function(){
+      Typemint.get.js("content-tools/editor.js");
+    }
+  },
   get: {
-    js: function(filepath) {
-      return $.getScript("" + ROOTURL + filepath);
+    js: function(filepath, tm_options, tm_callback) {
+      var options = {};
+      if (tm_options !== undefined) {
+        options = tm_options;
+      }
+
+      var callback = function() {};
+      if (tm_callback !== undefined) {
+        callback = tm_callback;
+      }
+
+      var hREF;
+      if (options.hasOwnProperty("remote")) {
+        hREF = filepath
+      } else {
+        hREF = "" + ROOTURL + filepath
+      }
+
+      $.getScript(hREF, callback);
+
     },
     css: function(filepath, tm_options) {
 
@@ -67,8 +92,8 @@ Typemint = {
           var div = $styleSheet[0].cloneNode();
           var div2 = document.createElement("div");
 
-          div.appendChild( div.cloneNode() );
-          div2.appendChild( div );
+          div.appendChild(div.cloneNode());
+          div2.appendChild(div);
 
           outerHTML = div2.innerHTML;
         }
@@ -110,8 +135,18 @@ Typemint = {
 
     document.body.innerHTML = $(newContent).html();
 
+    // editor init
+    if (editReady) {
+      console.log("initializing from loading the html");
+      // turn on the editor
+      Typemint.editor.init();
+    } else {
+      editReady = true;
+    }
   }
 };
+
+
 
 // HTML
 Typemint.get.html("dashboard_component.html");
@@ -121,12 +156,13 @@ Typemint.get.html("dashboard_component.html");
 // Custom styles for this template
 Typemint.get.css("dashboard.css");
 Typemint.get.css("typemint.css");
+
 // HTML5 shim and Respond.js for IE8 support of HTML5 elements and media queries
-Typemint.get.css("https://oss.maxcdn.com/html5shiv/3.7.2/html5shiv.min.js", {
+Typemint.get.js("https://oss.maxcdn.com/html5shiv/3.7.2/html5shiv.min.js", {
   remote: true,
   ie: true
 });
-Typemint.get.css("https://oss.maxcdn.com/respond/1.4.2/respond.min.js", {
+Typemint.get.js("https://oss.maxcdn.com/respond/1.4.2/respond.min.js", {
   remote: true,
   ie: true
 });
@@ -135,3 +171,18 @@ Typemint.get.css("https://oss.maxcdn.com/respond/1.4.2/respond.min.js", {
 // jquery and bootstrap should already exist. so no need to load.
 // IE10 viewport hack for Surface/desktop Windows 8 bug
 Typemint.get.js("assets/js/ie10-viewport-bug-workaround.js");
+
+
+// Content-tools
+//Content-tools CSS
+Typemint.get.css("content-tools/content-tools.min.css");
+//Content-tools JS
+Typemint.get.js("content-tools/content-tools.min.js", {}, function() {
+  if (editReady) {
+    console.log("initializing from loading contenttools.js");
+    // turn on the editor
+    Typemint.editor.init();
+  } else {
+    editReady = true;
+  }
+});
