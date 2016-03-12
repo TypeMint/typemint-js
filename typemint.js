@@ -155,7 +155,6 @@ Typemint.get.html("dashboard_component.html");
 // all typemint themes require bootstrap.css, so no need to load it
 // Custom styles for this template
 Typemint.get.css("dashboard.css");
-Typemint.get.css("typemint.css");
 
 // HTML5 shim and Respond.js for IE8 support of HTML5 elements and media queries
 Typemint.get.js("https://oss.maxcdn.com/html5shiv/3.7.2/html5shiv.min.js", {
@@ -186,3 +185,7 @@ Typemint.get.js("content-tools/content-tools.min.js", {}, function() {
     editReady = true;
   }
 });
+
+
+// last but not least (so that any css overrides are handled)
+Typemint.get.css("typemint.css");
