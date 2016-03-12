@@ -1,0 +1,18 @@
+
+
+.tm_navbar {
+  border-bottom: 1px solid hsla(168,20%,90%,1); /*1px solid #E4E2E2;*/
+  background: #FFFFFF; /*hsla(168,100%,99%,1);*/ /*hsla(168,100%,98%,1); *//* hsl(166, 100%, 95%); *//* hsl(177, 100%, 95%); */
+}
+.tm_sidebar {
+  background: #FFFFFF; /* hsl(233, 48%, 20%);*/ /*hsl(221, 35%, 12%);*/  
+  border-right: 1px solid #E4E2E2
+}
+.tm_artboard {
+  background: hsla(168,100%,99%,1); /*#FFFFFF; #F5F5F5;*/
+}
+#tm_wrapper {
+  margin-top: 30px;
+  box-shadow: 0px 0px 4px hsla(168,10%,70%,1); /*0px 0px 8px hsla(0,0%,40%,1);*/ /* 0px 0px 4px #aaa; */
+  background: #FFFFFF;
+}
