@@ -7,6 +7,7 @@ editReady = false;
 Typemint = {
   editor : {
     init : function(){
+      // if there isn't a content editable section, this won't do anything.
       Typemint.get.js("content-tools/editor.js");
     }
   },
@@ -143,6 +144,32 @@ Typemint = {
     } else {
       editReady = true;
     }
+  },
+  compileChanges : function(regions){
+    /// use the current URL to get the source
+
+    $.get(window.location.href , function(src) {
+      // my_var contains whatever that request returned
+      // var $src = src;
+
+      var pageContent =  $('<typemint />',{html:src}); //document.createElement('typemint'); // create virtual div
+      //$(pageContent).html(src); // put the src into this virtual div so that you can modify the src vitually
+
+      // replace the necessary parts
+      for (name in regions) {
+        console.log(name);
+          if (regions.hasOwnProperty(name)) {
+              $(pageContent).find('[data-tm-name='+ name +']').html(regions[name]);
+          }
+      }
+
+      // for now I'm just replacing the page with the new content,
+      // later I'll send this to the API to update the repo and make the changes permanent
+
+      document.write($(pageContent).html());
+      document.close();
+
+    });
   }
 };
 
