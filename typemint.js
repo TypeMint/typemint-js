@@ -166,6 +166,7 @@ Typemint = {
       // for now I'm just replacing the page with the new content,
       // later I'll send this to the API to update the repo and make the changes permanent
 
+      document.open('text/html');
       document.write($(pageContent).html());
       document.close();
 
