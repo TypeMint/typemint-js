@@ -16,7 +16,10 @@ Typemint = {
   editor : {
     init : function(){
       // if there isn't a content editable section, this won't do anything.
-      Typemint.get.js("content-tools/editor.js");
+        if(!editor) {
+            Typemint.get.js("content-tools/editor.js");
+            editor = true;
+        }
     }
   },
   get: {
@@ -193,7 +196,7 @@ Typemint = {
       // working with just the body, since that's where the writing happens. the rest should remain intact.
       var $srcBodyInner = $('<div />',{
         html: srcBodyOuter.match( excludeBodyReg )[1]
-      })
+      });
 
       // replace the necessary parts inside the body. If a section wasn't changed, it doesn't get overwritten, so in that case the DOM creation is all that effected it.
       for (name in regions) {
@@ -238,49 +241,59 @@ Typemint = {
       }
 
     });
-  }
+  },
+    init : function(){
+
+    // stuff that needs to get re-downloaded each time
+        // basically html and css files
+        // js files are cached outside of the DOM
+        editor = null;
+        // HTML
+        Typemint.get.html("dashboard_component.html");
+
+        // CSS
+        // all typemint themes require bootstrap.css, so no need to load it
+        // Custom styles for this template
+        Typemint.get.css("dashboard.css");
+        //Content-tools CSS
+        Typemint.get.css("content-tools/content-tools.min.css");
+
+        // last but not least (so that any css overrides are handled)
+        Typemint.get.css("typemint.css");
+
+        if (editReady) {
+            console.log("initializing from Typemint.init()");
+            // turn on the editor
+            Typemint.editor.init();
+        }
+    }
 };
 
-
-
-// HTML
-Typemint.get.html("dashboard_component.html");
-
-// CSS
-// all typemint themes require bootstrap.css, so no need to load it
-// Custom styles for this template
-Typemint.get.css("dashboard.css");
-
-// HTML5 shim and Respond.js for IE8 support of HTML5 elements and media queries
-Typemint.get.js("https://oss.maxcdn.com/html5shiv/3.7.2/html5shiv.min.js", {
-  remote: true,
-  ie: true
-});
-Typemint.get.js("https://oss.maxcdn.com/respond/1.4.2/respond.min.js", {
-  remote: true,
-  ie: true
-});
+// stuff that only needs to be done once
 
 // JS
-// jquery and bootstrap should already exist. so no need to load.
+// HTML5 shim and Respond.js for IE8 support of HTML5 elements and media queries
+Typemint.get.js("https://oss.maxcdn.com/html5shiv/3.7.2/html5shiv.min.js", {
+    remote: true,
+    ie: true
+});
+Typemint.get.js("https://oss.maxcdn.com/respond/1.4.2/respond.min.js", {
+    remote: true,
+    ie: true
+});
+
 // IE10 viewport hack for Surface/desktop Windows 8 bug
 Typemint.get.js("assets/js/ie10-viewport-bug-workaround.js");
 
-
-// Content-tools
-//Content-tools CSS
-Typemint.get.css("content-tools/content-tools.min.css");
 //Content-tools JS
 Typemint.get.js("content-tools/content-tools.min.js", {}, function() {
-  if (editReady) {
-    console.log("initializing from loading contenttools.js");
-    // turn on the editor
-    Typemint.editor.init();
-  } else {
-    editReady = true;
-  }
+    if (editReady) {
+        console.log("initializing from loading contenttools.js");
+        // turn on the editor
+        Typemint.editor.init();
+    } else {
+        editReady = true;
+    }
 });
 
-
-// last but not least (so that any css overrides are handled)
-Typemint.get.css("typemint.css");
+Typemint.init();

@@ -1,4 +1,4 @@
-var editor;
+//var editor;
 
 globalRegions = "";
 
