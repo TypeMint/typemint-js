@@ -17,7 +17,7 @@ Typemint = {
     init : function(){
       // if there isn't a content editable section, this won't do anything.
         if(!editor) {
-            Typemint.get.js("content-tools/editor.js");
+            Typemint.get.js("assets/js/editor.js");
             editor = true;
         }
     }
@@ -254,12 +254,12 @@ Typemint = {
         // CSS
         // all typemint themes require bootstrap.css, so no need to load it
         // Custom styles for this template
-        Typemint.get.css("dashboard.css");
+        //Typemint.get.css("dashboard.css"); codekit imported
         //Content-tools CSS
-        Typemint.get.css("content-tools/content-tools.min.css");
+        //Typemint.get.css("content-tools/content-tools.min.css"); codekit imported
 
         // last but not least (so that any css overrides are handled)
-        Typemint.get.css("typemint.css");
+        //Typemint.get.css("typemint.css"); codekit imported
 
         if (editReady) {
             console.log("initializing from Typemint.init()");
@@ -286,7 +286,7 @@ Typemint.get.js("https://oss.maxcdn.com/respond/1.4.2/respond.min.js", {
 Typemint.get.js("assets/js/ie10-viewport-bug-workaround.js");
 
 //Content-tools JS
-Typemint.get.js("content-tools/content-tools.min.js", {}, function() {
+Typemint.get.js("assets/js/content-tools.min.js", {}, function() {
     if (editReady) {
         console.log("initializing from loading contenttools.js");
         // turn on the editor
