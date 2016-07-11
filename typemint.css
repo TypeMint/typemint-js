@@ -2,7 +2,7 @@
 
 .tm_navbar {
   z-index: 1000;
-  border-bottom: ; /* 1px solid hsla(168,20%,90%,1) */ /*1px solid #E4E2E2;*/
+  /*border-bottom: ; *//* 1px solid hsla(168,20%,90%,1) *//* *//*1px solid #E4E2E2;*/
   background: hsla(168,100%,99%,1); /*hsla(168,100%,98%,1); *//* hsl(166, 100%, 95%); *//* hsl(177, 100%, 95%); */
   box-shadow: 0px 0px 2px hsla(168,10%,53%,1);
 }
@@ -23,6 +23,7 @@
 #tm_wrapper {
   margin-top: 30px;
   box-shadow: 0px 0px 30px hsla(168,10%,65%,1); /*0px 0px 4px hsla(168,10%,70%,1); *//*0px 0px 8px hsla(0,0%,40%,1);*/ /* 0px 0px 4px #aaa; */
+  position: relative;
   /*background: #FFFFFF;*/
 }
 
