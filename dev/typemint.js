@@ -24,6 +24,7 @@ Typemint = {
   },
   get: {
     js: function(filepath, tm_options, tm_callback) {
+        filepath = filepath + FILESUFFIX;
       var options = {};
       if (tm_options !== undefined) {
         options = tm_options;
@@ -45,6 +46,7 @@ Typemint = {
 
     },
     css: function(filepath, tm_options) {
+        filepath = filepath + FILESUFFIX;
 
       var hREF;
       var options = {};
@@ -120,6 +122,7 @@ Typemint = {
       $styleSheet.appendTo('head');
     },
     html: function(filepath) {
+        filepath = filepath + FILESUFFIX;
 
       var fileLocation = "" + ROOTURL + filepath;
 
