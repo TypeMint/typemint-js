@@ -145,7 +145,7 @@ Typemint = {
       var today_date = [year, month, day].join('-');
 
 
-      $.get(APIROOT + "theme/pages/post.html", function(HTML) {
+      $.get(APIROOT + "theme/pages/post.html", function(fileResult) {
 
           var newFileName = today_date + Date.now() + ".html";
 
@@ -159,7 +159,7 @@ Typemint = {
               contentType: "application/json",
               data: JSON.stringify({
                   "message": "new post " + Date.now(),
-                  "content": Base64.encode(HTML),
+                  "content": fileResult.content // already base64 encoded since pulled from github
 
               })
           })
