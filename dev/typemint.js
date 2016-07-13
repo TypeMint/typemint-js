@@ -167,9 +167,9 @@ Typemint = {
                   console.log("HTTP Request Succeeded: " + jqXHR.status);
                   console.log(data);
 
-                  document.open('text/html');
-                  document.write(Base64.decode(fileResult.content));
-                  document.close();
+                  //document.open('text/html');
+                  //document.write(Base64.decode(fileResult.content));
+                  //document.close();
 
                   //window.location.href("newFileName");
 
