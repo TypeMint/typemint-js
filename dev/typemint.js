@@ -145,12 +145,12 @@ Typemint = {
       var today_date = [year, month, day].join('-');
 
 
-      $.get(APIROOT + "dist/theme/pages/post.html", function(HTML) {
+      $.get(APIROOT + "theme/pages/post.html", function(HTML) {
 
           var newFileName = today_date + Date.now() + ".html";
 
           jQuery.ajax({
-              url: APIROOT + "/dist/posts/" + newFileName,
+              url: APIROOT + "/posts/" + newFileName,
               type: "PUT",
               headers: {
                   "Authorization": AUTHTOKEN,
