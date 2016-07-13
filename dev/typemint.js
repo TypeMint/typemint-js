@@ -150,7 +150,7 @@ Typemint = {
           var newFileName = today_date + Date.now() + ".html";
 
           jQuery.ajax({
-              url: APIROOT + "/posts/" + newFileName,
+              url: APIROOT + "posts/" + newFileName,
               type: "PUT",
               headers: {
                   "Authorization": AUTHTOKEN,
