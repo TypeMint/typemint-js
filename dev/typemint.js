@@ -166,12 +166,15 @@ Typemint = {
               .done(function(data, textStatus, jqXHR) {
                   console.log("HTTP Request Succeeded: " + jqXHR.status);
                   console.log(data);
-                  //document.open('text/html');
-                  //document.write(newHTML);
-                  //document.close();
+
+                  document.open('text/html');
+                  document.write(Base64.decode(fileResult.content));
+                  document.close();
 
                   //window.location.href("newFileName");
-                  window.location.href = newFileName;
+                  //window.location.href = newFileName;
+
+                  window.history.pushState("created new post", "new post", newFileName);
               })
               .fail(function(jqXHR, textStatus, errorThrown) {
                   console.log("HTTP Request Failed");
