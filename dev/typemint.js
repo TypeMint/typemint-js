@@ -145,7 +145,7 @@ Typemint = {
       var today_date = [year, month, day].join('-');
 
 
-      $.get(APIROOT + "theme/pages/post.html", function(fileResult) {
+      $.get(APIROOT + "theme/post.html", function(fileResult) {
 
           var newFileName = today_date + "-" + Date.now() + ".html";
 
