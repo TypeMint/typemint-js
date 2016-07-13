@@ -147,8 +147,10 @@ Typemint = {
 
       $.get(APIROOT + "/dist/theme/pages/post.html", function(HTML) {
 
+          var newFileName = today_date + Date.now() + ".html";
+
           jQuery.ajax({
-              url: APIROOT + "/dist/posts/" + today_date + Date.now(),
+              url: APIROOT + "/dist/posts/" + newFileName,
               type: "PUT",
               headers: {
                   "Authorization": AUTHTOKEN,
@@ -164,9 +166,12 @@ Typemint = {
               .done(function(data, textStatus, jqXHR) {
                   console.log("HTTP Request Succeeded: " + jqXHR.status);
                   console.log(data);
-                  document.open('text/html');
-                  document.write(newHTML);
-                  document.close();
+                  //document.open('text/html');
+                  //document.write(newHTML);
+                  //document.close();
+
+                  //window.location.href("newFileName");
+                  window.location.href = newFileName;
               })
               .fail(function(jqXHR, textStatus, errorThrown) {
                   console.log("HTTP Request Failed");
