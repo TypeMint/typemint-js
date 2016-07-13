@@ -172,9 +172,37 @@ Typemint = {
                   document.close();
 
                   //window.location.href("newFileName");
-                  //window.location.href = newFileName;
 
-                  window.history.pushState("created new post", "new post", newFileName);
+                  // try to do a GET loop for the filename
+
+                  var fetch = setInterval(loadNewPage, 2000);
+                  var intervalI = 0;
+
+                  function loadNewPage(){
+                      intervalI++;
+                      jQuery.ajax({
+                          url: newFileName + "?v=" + intervalI,
+                          type: "GET"
+                      })
+                          .done(function(data2, textStatus2, jqXHR2) {
+                              console.log("HTTP Request Succeeded: " + jqXHR2.status);
+                              console.log(data2);
+
+                              clearInterval(fetch);
+                              window.location.href = newFileName;
+
+                          })
+                          .fail(function(jqXHR2, textStatus2, errorThrown) {
+                              console.log("HTTP Request" + intervalI + "Failed");
+                          })
+                          .always(function() {
+                              /* ... */
+                          });
+                  }
+
+
+                  //window.history.pushState("created new post", "new post", newFileName);
+                  // screw pushState
               })
               .fail(function(jqXHR, textStatus, errorThrown) {
                   console.log("HTTP Request Failed");
