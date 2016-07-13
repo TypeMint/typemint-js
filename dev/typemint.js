@@ -133,6 +133,49 @@ Typemint = {
       });
     }
   },
+  newPostPage: function(){
+
+      // get the date
+      var d = new Date(Date.now()),
+          month = '' + (d.getMonth() + 1),
+          day = '' + d.getDate(),
+          year = d.getFullYear();
+      if (month.length < 2) month = '0' + month;
+      if (day.length < 2) day = '0' + day;
+      var today_date = [year, month, day].join('-');
+
+
+      $.get(APIROOT + "/dist/theme/pages/post.html", function(HTML) {
+
+          jQuery.ajax({
+              url: APIROOT + "/dist/posts/" + today_date + Date.now(),
+              type: "PUT",
+              headers: {
+                  "Authorization": AUTHTOKEN,
+                  "Content-Type": "application/json",
+              },
+              contentType: "application/json",
+              data: JSON.stringify({
+                  "message": "new post " + Date.now(),
+                  "content": Base64.encode(HTML),
+
+              })
+          })
+              .done(function(data, textStatus, jqXHR) {
+                  console.log("HTTP Request Succeeded: " + jqXHR.status);
+                  console.log(data);
+                  document.open('text/html');
+                  document.write(newHTML);
+                  document.close();
+              })
+              .fail(function(jqXHR, textStatus, errorThrown) {
+                  console.log("HTTP Request Failed");
+              })
+              .always(function() {
+                  /* ... */
+              });
+      });
+  },
   load: function(src) {
 
     $('<meta/>', {
@@ -245,7 +288,7 @@ Typemint = {
 
     });
   },
-    init : function(){
+  init : function(){
 
     // stuff that needs to get re-downloaded each time
         // basically html and css files
