@@ -147,7 +147,7 @@ Typemint = {
 
       $.get(APIROOT + "theme/pages/post.html", function(fileResult) {
 
-          var newFileName = today_date + Date.now() + ".html";
+          var newFileName = today_date + "-" + Date.now() + ".html";
 
           jQuery.ajax({
               url: APIROOT + "posts/" + newFileName,
